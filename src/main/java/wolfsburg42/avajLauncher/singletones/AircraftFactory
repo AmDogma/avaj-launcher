@@ -1,0 +1,18 @@
+public class AircraftFactory {
+    private static volatile AircraftFactory instance;
+    
+    private AircraftFactory() {
+
+    }
+
+    public static AircraftFactory getInstance() {
+        if (instance == null){
+            synchronized (AircraftFactory.class) {
+                if (instance == null) {
+                    instance = new AircraftFactory();
+                }
+            }
+        }
+        return instance;
+    }
+}
