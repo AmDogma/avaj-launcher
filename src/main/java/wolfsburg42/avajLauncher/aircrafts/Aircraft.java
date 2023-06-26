@@ -1,6 +1,6 @@
 package main.java.wolfsburg42.avajLauncher.aircrafts;
 
-import main.java.wolfsburg42.avajLauncher.coordinates.Coordinates;
+import main.java.wolfsburg42.avajLauncher.basic.Coordinates;
 
 public abstract class Aircraft extends Flyable {
     protected long id;
