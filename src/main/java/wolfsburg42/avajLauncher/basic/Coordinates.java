@@ -1,14 +1,13 @@
 package main.java.wolfsburg42.avajLauncher.basic;
 
-import main.java.wolfsburg42.avajLauncher.exceptions.LandingExeption;
-
 public class Coordinates {
     private int longitude;
     private int latitude;
     private int height;
 
-    Coordinates(int p_longitude, int p_latitude, int p_height) {
-        //  нужно проверять все числа на минус
+    Coordinates(int p_longitude, int p_latitude, int p_height) throws Exception {
+        if (p_longitude < 0 || p_latitude < 0 || p_height > 100)
+            throw new Exception("BAD COORDINATES");    /// make own exception
         longitude = p_longitude;
         latitude = p_latitude;
         height = p_height;
@@ -34,13 +33,11 @@ public class Coordinates {
         latitude += distance;
     }
 
-    public void moveHeight(int distance) throws LandingExeption {
+    public void moveHeight(int distance) {
         height += distance;
         if (height > 100)
             height = 100;
-        else if (height <= 0) {
+        else if (height < 0)
             height = 0;
-            throw new LandingExeption();
-        }  
     }
 }

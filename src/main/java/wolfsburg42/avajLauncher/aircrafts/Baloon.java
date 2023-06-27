@@ -1,7 +1,6 @@
 package main.java.wolfsburg42.avajLauncher.aircrafts;
 
 import main.java.wolfsburg42.avajLauncher.basic.Coordinates;
-import main.java.wolfsburg42.avajLauncher.exceptions.LandingExeption;
 import main.java.wolfsburg42.avajLauncher.tower.WeatherProvider;
 
 public class Baloon extends Aircraft {
@@ -12,15 +11,18 @@ public class Baloon extends Aircraft {
 
     public void updateConditions() {
         String weather = WeatherProvider.getInstance().getCurrentWeather(coordinates);
-        if (weather == "SNOW") {
+        if (weather.equals("SNOW")) {
             coordinates.moveHeight(-15);
-        } else if (weather == "RAIN") {
+        } else if (weather.equals("RAIN")) {
             coordinates.moveHeight(-5);
-        } else if (weather == "FOG") {
+        } else if (weather.equals("FOG")) {
             coordinates.moveHeight(-3);
-        } else { // 
+        } else {
             coordinates.moveLongitude(2);
             coordinates.moveHeight(4);
+        }
+        if (coordinates.getHeight() == 0) {
+            weatherTower.unregister(this);
         }
     }
 

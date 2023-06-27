@@ -29,10 +29,11 @@ public class AircraftFactory {
                 return new JetPlane(++id, p_name, p_coordinates);
             default:
 
-                //some exeption for bonus
-                
+                //own exeption for bonus
+
+
+                //delete
                 System.out.println("\u001B[31mEXEPTION!\u001B[0m");
-                
                 return null;
         }
     }
