@@ -4,6 +4,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 import main.java.wolfsburg42.avajLauncher.aircrafts.Flyable;
+import main.java.wolfsburg42.avajLauncher.basic.WriteToFile;
 
 public class Tower {
     private List<Flyable> observers = new LinkedList<Flyable>();
@@ -11,10 +12,12 @@ public class Tower {
 
     public void register(Flyable p_flyable) {
         observers.add(p_flyable);
+        WriteToFile.getInstance().write("Tower says: " + p_flyable.getName() + " registered to weather tower.\n");
     }
 
     public void unregister(Flyable p_flyable) {
         observersToDelete.add(p_flyable);
+        WriteToFile.getInstance().write("Tower says: " + p_flyable.getName() + " unregistered from weather tower.\n");
     }
 
     protected void conditionChanged() {

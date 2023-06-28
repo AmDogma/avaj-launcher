@@ -1,0 +1,20 @@
+package main.java.wolfsburg42.avajLauncher.exceptions;
+
+public class ScenarioFileException extends Exception {
+    
+    public ScenarioFileException() {
+        super();
+    }
+
+    public ScenarioFileException(String message) {
+        super(message);
+    }
+
+    public ScenarioFileException(String message, Throwable cause) {
+        super(message, cause);
+    }
+
+    public ScenarioFileException(Throwable cause) {
+        super(cause);
+    }
+}

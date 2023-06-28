@@ -1,6 +1,7 @@
 package main.java.wolfsburg42.avajLauncher.aircrafts;
 
 import main.java.wolfsburg42.avajLauncher.basic.Coordinates;
+import main.java.wolfsburg42.avajLauncher.exceptions.ScenarioFileException;
 
 public class AircraftFactory {
     private static volatile AircraftFactory instance;
@@ -19,22 +20,16 @@ public class AircraftFactory {
         return instance;
     }
 
-    public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) {
+    public Flyable newAircraft(String p_type, String p_name, Coordinates p_coordinates) throws ScenarioFileException {
         switch (p_type) {
             case "Helicopter":
-                return new Helicopter(++id, p_name, p_coordinates);
+                return new Helicopter(++id, p_type + "#" + p_name + "(" + id + ")", p_coordinates);
             case "Baloon":
-                return new Baloon(++id, p_name, p_coordinates);
+                return new Baloon(++id, p_type + "#" + p_name + "(" + id + ")", p_coordinates);
             case "JetPlane":
-                return new JetPlane(++id, p_name, p_coordinates);
+                return new JetPlane(++id, p_type + "#" + p_name + "(" + id + ")", p_coordinates);
             default:
-
-                //own exeption for bonus
-
-
-                //delete
-                System.out.println("\u001B[31mEXEPTION!\u001B[0m");
-                return null;
+                throw new ScenarioFileException("ScenarioFileException: Aircraft type is wrong!");
         }
     }
 

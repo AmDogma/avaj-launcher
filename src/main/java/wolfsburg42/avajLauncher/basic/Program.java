@@ -7,49 +7,55 @@ import java.io.IOException;
 
 import main.java.wolfsburg42.avajLauncher.aircrafts.AircraftFactory;
 import main.java.wolfsburg42.avajLauncher.aircrafts.Flyable;
+import main.java.wolfsburg42.avajLauncher.exceptions.ScenarioFileException;
 import main.java.wolfsburg42.avajLauncher.tower.WeatherTower;
 
 public class Program {
+
     public final static String fileToWrite = "simulation.txt";
-    public void run(String scenarioFile) {
-        WeatherTower tower = new WeatherTower();
-        AircraftFactory aircraftFactory = AircraftFactory.getInstance();
-        int weatherChanges = 0;
+    private WeatherTower tower = new WeatherTower();
+    private AircraftFactory aircraftFactory = AircraftFactory.getInstance();
+    private int weatherChanges = 0;
+    private Coordinates coordinates;
+    private Flyable flyable;
+    private String[] lines;
+    private String scenarioFile;
 
+    public Program(String p_scenarioFile) {
+        scenarioFile = p_scenarioFile;
+    }
 
+    public void run() throws ScenarioFileException {
         try (BufferedReader reader = new BufferedReader(new FileReader(scenarioFile))) {
-            
-            weatherChanges = Integer.parseInt(reader.readLine());
-            for(String line = reader.readLine(); line != null; line = reader.readLine()) {
-                String[] lines = line.split(" ");
-                if (lines.length != 5)
-                    throw new Exception("AAAAAAAAAAAAA");  // own except
-                Coordinates coordinates = new Coordinates(
-                    Integer.parseInt(lines[2]), Integer.parseInt(lines[3]), Integer.parseInt(lines[4]));
-                
-                Flyable flyable = aircraftFactory.newAircraft(lines[0], lines[1], coordinates);
+            try (FileWriter writer = new FileWriter(fileToWrite)) {
+                WriteToFile.getInstance().setFileStream(writer);
+                weatherChanges = Integer.parseInt(reader.readLine());
+                if (weatherChanges < 1) {
+                    throw new ScenarioFileException("ScenarioFileException: weatherChanges < 1");
+                }
+                for(String line = reader.readLine(); line != null; line = reader.readLine()) {
+                    lines = line.split(" ");
+                    if (lines.length != 5)
+                        throw new ScenarioFileException("ScenarioFileException: lines.length != 5");
+                    coordinates = new Coordinates(
+                        Integer.parseInt(lines[2]), Integer.parseInt(lines[3]), Integer.parseInt(lines[4]));
+                    flyable = aircraftFactory.newAircraft(lines[0], lines[1], coordinates);
 
-                flyable.registerTower(tower);
-                if (coordinates.getHeight() != 0)
-                    tower.register(flyable);
-            }
+                    flyable.registerTower(tower);
+                    if (coordinates.getHeight() != 0) {
+                        tower.register(flyable);
+                    }
+                }
+                for(; weatherChanges > 0; --weatherChanges) {
+                    tower.changeWeather();
+                }
+            } catch(NumberFormatException e) {
+                throw new ScenarioFileException("ScenarioFileException: " + e.getMessage(), e);
+            } 
         } catch (IOException e) {
+            throw new ScenarioFileException("ScenarioFileException: " + e.getMessage(), e);
+        }  catch (Exception e) {
             e.printStackTrace();
-            return;
-        } catch (Exception e) {
-            e.printStackTrace();
-            return;
         } 
-
-        //exceptions will be on screen input 
-        
-        try (FileWriter writer = new FileWriter(fileToWrite)) {
-            //initialize logger
-            for(; weatherChanges > 0; --weatherChanges) {
-                tower.changeWeather();
-            }
-        } catch (IOException e) {
-            
-        }
     }
 }

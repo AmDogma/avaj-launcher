@@ -1,6 +1,9 @@
 DONE удалить все == "" сдеать через equals 
 
-1) loger create class
-2) create all exceptions
-3)  write all messages
-4) check file to delete 
++ loger create class
++ random algo
++ write all messages
++ create all exceptions
++ check file if it can't be read or deleted
++ check height no more 100 in the begin
+- change Program class to make easy to read

@@ -2,7 +2,7 @@ package main.java.wolfsburg42.avajLauncher.aircrafts;
 
 import main.java.wolfsburg42.avajLauncher.basic.Coordinates;
 
-public abstract class Aircraft extends Flyable {
+public class Aircraft extends Flyable {
     protected long id;
     protected String name;
     protected Coordinates coordinates;
@@ -10,5 +10,13 @@ public abstract class Aircraft extends Flyable {
         id = p_id;
         name = p_name;
         coordinates = p_coordinate;
+    }
+
+    public void updateConditions() {
+        throw new UnsupportedOperationException("Unimplemented method 'updateConditions'");
+    }
+
+    public String getName() {
+        return name;
     }
 }
