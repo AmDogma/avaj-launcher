@@ -9,7 +9,7 @@ public class Coordinates {
 
     Coordinates(int p_longitude, int p_latitude, int p_height) throws ScenarioFileException {
         if (p_longitude < 0 || p_latitude < 0 || p_height > 100)
-            throw new ScenarioFileException("ScenarioFileException: Coordinates is wrong");
+            throw new ScenarioFileException("Coordinates is wrong");
         longitude = p_longitude;
         latitude = p_latitude;
         height = p_height;

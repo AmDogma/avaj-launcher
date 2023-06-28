@@ -1,9 +1,11 @@
-DONE удалить все == "" сдеать через equals 
-
++ change all == to equals 
 + loger create class
 + random algo
 + write all messages
 + create all exceptions
 + check file if it can't be read or deleted
 + check height no more 100 in the begin
-- change Program class to make easy to read
++ change Program class to make easy to read
++ compile like in subject
++ exception for ID
++ ScenarioFileException text should be in one place

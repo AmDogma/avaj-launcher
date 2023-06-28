@@ -29,8 +29,12 @@ public class AircraftFactory {
             case "JetPlane":
                 return new JetPlane(++id, p_type + "#" + p_name + "(" + id + ")", p_coordinates);
             default:
-                throw new ScenarioFileException("ScenarioFileException: Aircraft type is wrong!");
+                throw new ScenarioFileException("Aircraft type is wrong!");
         }
+    }
+
+    public boolean idChackMax() {
+        return id == Long.MAX_VALUE;
     }
 
 }
