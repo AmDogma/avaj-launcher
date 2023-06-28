@@ -7,7 +7,7 @@ public class ScenarioFileException extends Exception {
     }
 
     public ScenarioFileException(String message) {
-        super("ScenarioFileException: " + message);
+        super(message);
     }
 
     public ScenarioFileException(String message, Throwable cause) {
